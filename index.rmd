@@ -1,0 +1,55 @@
+---
+title: "index"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+---
+
+
+### Frame 1
+
+```{r}
+#data=read.csv(input, header=T,sep=";")
+library(wordcloud)
+sumv<-read.table("./cwsum", header=T,sep="")
+commonality.cloud(sumv,comonality.measure=min,scale=c(4,0.05),random.order=F, colors = brewer.pal(6, "PuBuGn"))
+```
+
+*** 
+
+Some commentary about Frame 1.
+
+### Frame 2 {data-commentary-width=400}
+
+```{r}
+
+```
+
+***
+
+### Frame 3 {data-commentary-width=400}
+
+```{r}
+library(cluster)
+traindtm<-read.table("./dtm", header=T,sep="")
+d<-dist(traindtm)
+groups <- hclust(d,method="ward.D")
+plot(groups, hang=-1)
+rect.hclust(groups,3)
+```
+
+*** 
+
+Some commentary about Frame 3.
+
+
+### Frame 4 {data-commentary-width=400}
+
+```{r}
+kfit <- kmeans(d, 3, nstart=100)
+clusplot(traindtm, kfit$cluster, color=T, shade=T, labels=3, lines=0)
+```
+
+*** 
+
+Some commentary about Frame 4.

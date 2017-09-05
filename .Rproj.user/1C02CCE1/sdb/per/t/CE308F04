@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Auto detect text files and perform LF normalization\n* text=auto\n\n# Custom for Visual Studio\n*.cs     diff=csharp\n\n# Standard to msysgit\n*.doc\t diff=astextplain\n*.DOC\t diff=astextplain\n*.docx diff=astextplain\n*.DOCX diff=astextplain\n*.dot  diff=astextplain\n*.DOT  diff=astextplain\n*.pdf  diff=astextplain\n*.PDF\t diff=astextplain\n*.rtf\t diff=astextplain\n*.RTF\t diff=astextplain\n",
+    "created" : 1504648861029.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4109614838",
+    "id" : "CE308F04",
+    "lastKnownWriteTime" : 1504641978,
+    "last_content_update" : 1504641978,
+    "path" : "G:/5-words/.gitattributes",
+    "project_path" : ".gitattributes",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}
