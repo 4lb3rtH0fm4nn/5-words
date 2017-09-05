@@ -1,5 +1,5 @@
 ---
-title: "Storyboard Commentary"
+title: "index"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
