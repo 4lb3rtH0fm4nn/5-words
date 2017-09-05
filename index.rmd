@@ -1,0 +1,47 @@
+---
+title: "Storyboard Commentary"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+---
+
+### Frame 1
+
+```{r}
+#data=read.csv(input, header=T,sep=";")
+library(wordcloud)
+sumv<-read.table("g:/webpagefinal/cwsum", header=T,sep="")
+commonality.cloud(sumv,comonality.measure=min,ordered.colors=T)
+
+```
+
+*** 
+
+Some commentary about Frame 1.
+
+### Frame 2 {data-commentary-width=400}
+
+```{r}
+library(cluster)
+traindtm<-read.table("g:/webpagefinal/dtm", header=T,sep="")
+d<-dist(traindtm)
+groups <- hclust(d,method="ward.D")
+plot(groups, hang=-1)
+rect.hclust(groups,3)
+```
+
+*** 
+
+Some commentary about Frame 2.
+
+
+### Frame 3 {data-commentary-width=400}
+
+```{r}
+kfit <- kmeans(d, 3, nstart=100)
+clusplot(traindtm, kfit$cluster, color=T, shade=T, labels=3, lines=0)
+```
+
+*** 
+
+Some commentary about Frame 3.
