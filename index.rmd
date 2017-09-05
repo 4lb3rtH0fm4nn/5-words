@@ -10,7 +10,7 @@ output:
 ```{r}
 #data=read.csv(input, header=T,sep=";")
 library(wordcloud)
-sumv<-read.table("g:/webpagefinal/cwsum", header=T,sep="")
+sumv<-read.table("./cwsum", header=T,sep="")
 commonality.cloud(sumv,comonality.measure=min,ordered.colors=T)
 
 ```
@@ -23,7 +23,7 @@ Some commentary about Frame 1.
 
 ```{r}
 library(cluster)
-traindtm<-read.table("g:/webpagefinal/dtm", header=T,sep="")
+traindtm<-read.table("./dtm", header=T,sep="")
 d<-dist(traindtm)
 groups <- hclust(d,method="ward.D")
 plot(groups, hang=-1)
