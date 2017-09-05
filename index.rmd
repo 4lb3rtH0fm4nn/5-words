@@ -5,14 +5,14 @@ output:
     storyboard: true
 ---
 
+
 ### Frame 1
 
 ```{r}
 #data=read.csv(input, header=T,sep=";")
 library(wordcloud)
 sumv<-read.table("./cwsum", header=T,sep="")
-commonality.cloud(sumv,comonality.measure=min,ordered.colors=T)
-
+commonality.cloud(sumv,comonality.measure=min,scale=c(4,0.05),random.order=F, colors = brewer.pal(6, "PuBuGn"))
 ```
 
 *** 
@@ -20,6 +20,14 @@ commonality.cloud(sumv,comonality.measure=min,ordered.colors=T)
 Some commentary about Frame 1.
 
 ### Frame 2 {data-commentary-width=400}
+
+```{r}
+
+```
+
+***
+
+### Frame 3 {data-commentary-width=400}
 
 ```{r}
 library(cluster)
@@ -32,10 +40,10 @@ rect.hclust(groups,3)
 
 *** 
 
-Some commentary about Frame 2.
+Some commentary about Frame 3.
 
 
-### Frame 3 {data-commentary-width=400}
+### Frame 4 {data-commentary-width=400}
 
 ```{r}
 kfit <- kmeans(d, 3, nstart=100)
@@ -44,4 +52,4 @@ clusplot(traindtm, kfit$cluster, color=T, shade=T, labels=3, lines=0)
 
 *** 
 
-Some commentary about Frame 3.
+Some commentary about Frame 4.

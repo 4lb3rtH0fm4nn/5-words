@@ -29,7 +29,6 @@ write.table(sumv,"./cwsum")
 write.table(tdm_m,"./dtm")
 d <- dist(dtm_m)
 groups <- hclust(d,method="ward.D")
-plot(groups, hang=-1)
 rmarkdown::render_site()
 
 
