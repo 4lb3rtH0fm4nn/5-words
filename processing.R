@@ -1,6 +1,6 @@
 #input
 args = commandArgs(trailingOnly=TRUE)
-input="./data.csv"
+input="../data/data.csv"
 library(tm)
 library(party)
 library(SnowballC)
