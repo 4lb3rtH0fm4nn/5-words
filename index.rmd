@@ -29,7 +29,6 @@ comparison.cloud(gsum2,scale=c(4,.5),max.words=300,colors=c("deepskyblue3","fire
 ```
 
 
-
 ### You can see a cluster dendrogram here
 
 ```{r}
