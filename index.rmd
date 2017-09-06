@@ -15,8 +15,6 @@ sumv<-read.table("/home/webadmin/R/dtm-test/data/cwsum", header=T,sep="")
 commonality.cloud(sumv,comonality.measure=min,scale=c(4,0.05),random.order=F, colors = brewer.pal(6, "PuBuGn"))
 ```
 
-*** 
-
 
 
 ### Here you can see a wordcloud that represents the most frequent words based on gender
@@ -29,7 +27,7 @@ comparison.cloud(gsum2,scale=c(4,.5),max.words=300,colors=c("deepskyblue3","fire
 
 ```
 
-***
+
 
 ### You can see a cluster dendrogram here
 
@@ -42,7 +40,7 @@ plot(groups, hang=-1)
 rect.hclust(groups,3)
 ```
 
-*** 
+
 
 
 
@@ -53,5 +51,5 @@ kfit <- kmeans(d, 3, nstart=100)
 clusplot(traindtm, kfit$cluster, color=T, shade=T, labels=3, lines=0)
 ```
 
-*** 
+
 
