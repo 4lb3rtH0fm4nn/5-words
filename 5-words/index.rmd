@@ -6,7 +6,7 @@ output:
 ---
 
 
-### Frame 1
+### These are the most common words that popped into your heads {data-commentary-width=0}
 
 ```{r}
 #data=read.csv(input, header=T,sep=";")
@@ -17,17 +17,21 @@ commonality.cloud(sumv,comonality.measure=min,scale=c(4,0.05),random.order=F, co
 
 *** 
 
-Some commentary about Frame 1.
 
-### Frame 2 {data-commentary-width=400}
+
+### Here you can see a wordcloud that represents the most frequent words based on gender {data-commentary-width=0}
 
 ```{r}
+gsum2<-read.table("./gsum", header=T,sep="")
+gsum2<-as.matrix(gsum2)
+colnames(gsum2)<-NULL
+comparison.cloud(gsum2,scale=c(4,.5),max.words=300,colors=c("deepskyblue3","firebrick2","darkorchid3"))
 
 ```
 
 ***
 
-### Frame 3 {data-commentary-width=400}
+### You can see a cluster dendrogram here {data-commentary-width=0}
 
 ```{r}
 library(cluster)
@@ -40,10 +44,9 @@ rect.hclust(groups,3)
 
 *** 
 
-Some commentary about Frame 3.
 
 
-### Frame 4 {data-commentary-width=400}
+### This is a graphical representation of your clusters {data-commentary-width=0}
 
 ```{r}
 kfit <- kmeans(d, 3, nstart=100)
@@ -52,4 +55,3 @@ clusplot(traindtm, kfit$cluster, color=T, shade=T, labels=3, lines=0)
 
 *** 
 
-Some commentary about Frame 4.
