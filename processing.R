@@ -1,6 +1,6 @@
 #input
 args = commandArgs(trailingOnly=TRUE)
-input="../data/data.csv"
+input="/home/webadmin/R/dtm-test/data/data.csv"
 library(tm)
 library(party)
 library(SnowballC)
@@ -26,8 +26,8 @@ rownames(dtm)<- c(eventdata[,1])
 sumv<-as.matrix(sort(rowSums(tdm_m),decreasing=TRUE))
 res <- data.frame(term=rownames(as.matrix(sumv)),frequency=rowSums(as.matrix(sumv))) 
 row.names(res)<-NULL
-write.table(sumv,"./cwsum")
-write.table(tdm_m,"./dtm")
+write.table(sumv,"/home/webadmin/R/dtm-test/data")
+write.table(tdm_m,"/home/webadmin/R/dtm-test/data")
 d <- dist(dtm_m)
 groups <- hclust(d,method="ward.D")
 
@@ -84,7 +84,7 @@ ttsumv<-t(tsumv)
 gsum<-rbind.fill.matrix(tmsumv,tfsumv,ttsumv)
 gsum<-t(gsum)
 gsum[is.na(gsum)] <- 0
-write.table(gsum,"./gsum")
+write.table(gsum,"/home/webadmin/R/dtm-test/data/gsum")
 
 rmarkdown::render_site()
 
