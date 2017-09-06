@@ -6,7 +6,7 @@ output:
 ---
 
 
-### These are the most common words that popped into your heads {data-commentary-width=0}
+### These are the most common words that popped into your heads
 
 ```{r}
 #data=read.csv(input, header=T,sep=";")
@@ -19,7 +19,7 @@ commonality.cloud(sumv,comonality.measure=min,scale=c(4,0.05),random.order=F, co
 
 
 
-### Here you can see a wordcloud that represents the most frequent words based on gender {data-commentary-width=0}
+### Here you can see a wordcloud that represents the most frequent words based on gender
 
 ```{r}
 gsum2<-read.table("/home/webadmin/R/dtm-test/data/gsum", header=T,sep="")
@@ -31,7 +31,7 @@ comparison.cloud(gsum2,scale=c(4,.5),max.words=300,colors=c("deepskyblue3","fire
 
 ***
 
-### You can see a cluster dendrogram here {data-commentary-width=0}
+### You can see a cluster dendrogram here
 
 ```{r}
 library(cluster)
@@ -46,7 +46,7 @@ rect.hclust(groups,3)
 
 
 
-### This is a graphical representation of your clusters {data-commentary-width=0}
+### This is a graphical representation of your clusters
 
 ```{r}
 kfit <- kmeans(d, 3, nstart=100)
