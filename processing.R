@@ -87,7 +87,7 @@ gsum<-t(gsum)
 gsum[is.na(gsum)] <- 0
 write.table(gsum,"/home/webadmin/R/dtm-test/data/gsum")
 
-rmarkdown::render_site()
+rmarkdown::render("index.rmd")
 
 
 
