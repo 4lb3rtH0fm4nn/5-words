@@ -1,5 +1,6 @@
 #input
 args = commandArgs(trailingOnly=TRUE)
+urldata="/home/webadmin/R/dtm-test/data/"
 input="/home/webadmin/R/dtm-test/data/data.csv"
 library(tm)
 library(party)
@@ -26,22 +27,22 @@ rownames(dtm)<- c(eventdata[,1])
 sumv<-as.matrix(sort(rowSums(tdm_m),decreasing=TRUE))
 res <- data.frame(term=rownames(as.matrix(sumv)),frequency=rowSums(as.matrix(sumv))) 
 row.names(res)<-NULL
-write.table(sumv,"/home/webadmin/R/dtm-test/data")
-write.table(tdm_m,"/home/webadmin/R/dtm-test/data")
+write.table(sumv,"/home/webadmin/R/dtm-test/data/cwsum")
+write.table(tdm_m,"/home/webadmin/R/dtm-test/data/dtm")
 d <- dist(dtm_m)
 groups <- hclust(d,method="ward.D")
 
 
 #wordcloud2
-mindex<-which(eventdata[,2]==0,arr.ind=T)
-findex<-which(eventdata[,2]==1,arr.ind=T)
-tindex<-which(eventdata[,2]==2,arr.ind=T)
+mindex<-which(eventdata[,3]==0,arr.ind=T)
+findex<-which(eventdata[,3]==1,arr.ind=T)
+tindex<-which(eventdata[,3]==2,arr.ind=T)
 mdata<-eventdata[mindex,]
 fdata<-eventdata[findex,]
 tdata<-eventdata[tindex,]
-mwords<-mdata[,4:8]
-fwords<-fdata[,4:8]
-twords<-tdata[,4:8]
+mwords<-mdata[,5:9]
+fwords<-fdata[,5:9]
+twords<-tdata[,5:9]
 mwordsvector<-paste(mwords[,1],mwords[,2],mwords[,3],mwords[,4],mwords[,5])
 fwordsvector<-paste(fwords[,1],fwords[,2],fwords[,3],fwords[,4],fwords[,5])
 twordsvector<-paste(twords[,1],twords[,2],twords[,3],twords[,4],twords[,5])

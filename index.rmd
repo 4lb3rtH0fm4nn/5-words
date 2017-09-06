@@ -35,7 +35,7 @@ comparison.cloud(gsum2,scale=c(4,.5),max.words=300,colors=c("deepskyblue3","fire
 
 ```{r}
 library(cluster)
-traindtm<-read.table("./dtm", header=T,sep="")
+traindtm<-read.table("/home/webadmin/R/dtm-test/data/dtm", header=T,sep="")
 d<-dist(traindtm)
 groups <- hclust(d,method="ward.D")
 plot(groups, hang=-1)
