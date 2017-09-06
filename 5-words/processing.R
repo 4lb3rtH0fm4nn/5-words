@@ -7,7 +7,7 @@ library(SnowballC)
 library(wordcloud)
 library(cluster)
 library(plyr)
-eventdata<-read.csv(input, header=T,sep=";")
+eventdata<-read.csv(input, header=T,sep=",")
 eventwords<-eventdata[,5:9]
 userwordsvector<-paste(eventwords[,1],eventwords[,2],eventwords[,3],eventwords[,4],eventwords[,5])
 wmatrix<-as.matrix(userwordsvector)
@@ -30,6 +30,8 @@ write.table(sumv,"./cwsum")
 write.table(tdm_m,"./dtm")
 d <- dist(dtm_m)
 groups <- hclust(d,method="ward.D")
+
+
 #wordcloud2
 mindex<-which(eventdata[,2]==0,arr.ind=T)
 findex<-which(eventdata[,2]==1,arr.ind=T)
