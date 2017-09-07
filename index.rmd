@@ -1,30 +1,31 @@
 ---
-title: "index"
+title: "Five Words Analytics"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
 ---
-
-
+```{r}
+urltodata<-"/home/webadmin/R/dtm-test/data/"
+```
 ### These are the most common words that popped into your heads
 
 ```{r}
 #data=read.csv(input, header=T,sep=";")
 library(wordcloud)
-sumv<-read.table("/home/webadmin/R/dtm-test/data/cwsum", header=T,sep="")
-commonality.cloud(sumv,comonality.measure=min,scale=c(4,0.05),random.order=F, colors = brewer.pal(6, "PuBuGn"),use.r.layout=F)
+sumv<-read.table(paste0(urltodata,"cwsum"), header=T,sep="")
+commonality.cloud(sumv,comonality.measure=min,scale=c(3.5,0.1),random.order=F, colors = brewer.pal(6, "PuBuGn"),use.layout.r=F)
 
 
 ```
 
 
-### Here you can see a wordcloud that represents the most frequent words based on gender
+### Here you can see a wordcloud that represents the most frequent words based on gender. Legend: Blue - Male; Red - female; Purple - Other
 
 ```{r}
-gsum2<-read.table("/home/webadmin/R/dtm-test/data/gsum", header=T,sep="")
+gsum2<-read.table(paste0(urltodata,"gsum"), header=T,sep="")
 gsum2<-as.matrix(gsum2)
 colnames(gsum2)<-NULL
-comparison.cloud(gsum2,scale=c(4,.5),max.words=300,colors=c("deepskyblue3","firebrick2","darkorchid3"))
+comparison.cloud(gsum2,scale=c(3,.01),max.words=300,colors=c("deepskyblue3","firebrick2","darkorchid3"))
 
 ```
 
@@ -33,18 +34,14 @@ comparison.cloud(gsum2,scale=c(4,.5),max.words=300,colors=c("deepskyblue3","fire
 
 ```{r}
 library(cluster)
-traindtm<-read.table("/home/webadmin/R/dtm-test/data/dtm", header=T,sep="")
+library(ape)
+
+
+traindtm<-read.table(paste0(urltodata,"dtm"), header=T,sep="")
 d<-dist(traindtm)
-groups <- hclust(d,method="ward.D")
-plot(groups, hang=-1)
-rect.hclust(groups,3)
+hc <- hclust(d,method="ward.D")
+dtmdim<-dim(traindtm)
+size<-log(dtmdim[1],base=exp(10))
+plot(hc, cex = size,main="",xlab="",ylab="",sub="")
+
 ```
-
-
-### This is a graphical representation of your clusters
-
-```{r}
-kfit <- kmeans(d, 3, nstart=100)
-clusplot(traindtm, kfit$cluster, color=T, shade=T, labels=3, lines=0)
-```
-
