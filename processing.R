@@ -1,14 +1,15 @@
 #input
 args = commandArgs(trailingOnly=TRUE)
+
 urldata="/home/webadmin/R/dtm-test/data/"
-input="/home/webadmin/R/dtm-test/data/data.csv"
+urlout="/home/webadmin/R/dtm-test/data/"
 library(tm)
 library(party)
 library(SnowballC)
 library(wordcloud)
 library(cluster)
 library(plyr)
-eventdata<-read.csv(input, header=T,sep=",")
+eventdata<-read.csv(paste0(urldata,"data.csv"), header=T,sep=",")
 eventwords<-eventdata[,5:9]
 userwordsvector<-paste(eventwords[,1],eventwords[,2],eventwords[,3],eventwords[,4],eventwords[,5])
 wmatrix<-as.matrix(userwordsvector)
@@ -26,9 +27,9 @@ rownames(dtm)<- c(eventdata[,1])
 sumv<-as.matrix(sort(rowSums(tdm_m),decreasing=TRUE))
 res <- data.frame(term=rownames(as.matrix(sumv)),frequency=rowSums(as.matrix(sumv))) 
 row.names(res)<-NULL
+write.table(sumv,paste0(urlout,"cwsum"))
 write.table(res,paste0(urlout,"wc2sum"))
-write.table(sumv,"/home/webadmin/R/dtm-test/data/cwsum")
-write.table(tdm_m,"/home/webadmin/R/dtm-test/data/dtm")
+write.table(tdm_m,paste0(urlout,"dtm"))
 d <- dist(dtm_m)
 groups <- hclust(d,method="ward.D")
 
@@ -85,13 +86,6 @@ ttsumv<-t(tsumv)
 gsum<-rbind.fill.matrix(tmsumv,tfsumv,ttsumv)
 gsum<-t(gsum)
 gsum[is.na(gsum)] <- 0
-write.table(gsum,"/home/webadmin/R/dtm-test/data/gsum")
+write.table(gsum,paste0(urlout,"gsum"))
 
 rmarkdown::render("index.rmd")
-
-
-
-
-
-
-
