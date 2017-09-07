@@ -26,6 +26,7 @@ rownames(dtm)<- c(eventdata[,1])
 sumv<-as.matrix(sort(rowSums(tdm_m),decreasing=TRUE))
 res <- data.frame(term=rownames(as.matrix(sumv)),frequency=rowSums(as.matrix(sumv))) 
 row.names(res)<-NULL
+write.table(res,paste0(urlout,"wc2sum"))
 write.table(sumv,"/home/webadmin/R/dtm-test/data/cwsum")
 write.table(tdm_m,"/home/webadmin/R/dtm-test/data/dtm")
 d <- dist(dtm_m)

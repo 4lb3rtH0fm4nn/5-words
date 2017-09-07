@@ -7,14 +7,13 @@ output:
 ```{r}
 urltodata<-"/home/webadmin/R/dtm-test/data/"
 ```
-### These are the most common words that popped into your heads
+### These are the most common words that popped into your heads {data-width=100}
 
 ```{r}
 #data=read.csv(input, header=T,sep=";")
-library(wordcloud)
-sumv<-read.table(paste0(urltodata,"cwsum"), header=T,sep="")
-commonality.cloud(sumv,comonality.measure=min,scale=c(3.5,0.1),random.order=F, colors = brewer.pal(6, "PuBuGn"),use.layout.r=F)
-
+library(wordcloud2)
+wcsumv<-read.table(paste0(urltodata,"wc2sum"), header=T,sep="")
+wordcloud2(demoFreq, size = 0.8,shape="circle")
 
 ```
 
@@ -22,10 +21,11 @@ commonality.cloud(sumv,comonality.measure=min,scale=c(3.5,0.1),random.order=F, c
 ### Here you can see a wordcloud that represents the most frequent words based on gender. Legend: Blue - Male; Red - female; Purple - Other
 
 ```{r}
+library(wordcloud)
 gsum2<-read.table(paste0(urltodata,"gsum"), header=T,sep="")
 gsum2<-as.matrix(gsum2)
 colnames(gsum2)<-NULL
-comparison.cloud(gsum2,scale=c(2.5,.01),max.words=300,colors=c("deepskyblue3","firebrick2","darkorchid3"))
+comparison.cloud(gsum2,scale=c(3,.01),max.words=300,colors=c("deepskyblue3","firebrick2","darkorchid3"))
 
 ```
 
@@ -41,7 +41,7 @@ traindtm<-read.table(paste0(urltodata,"dtm"), header=T,sep="")
 d<-dist(traindtm)
 hc <- hclust(d,method="ward.D")
 dtmdim<-dim(traindtm)
-size<-log(dtmdim[1],base=exp(10))
+size<-15/dtmdim[1]
 plot(hc, cex = size,main="",xlab="",ylab="",sub="")
 
 ```
