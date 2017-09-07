@@ -41,7 +41,7 @@ traindtm<-read.table(paste0(urltodata,"dtm"), header=T,sep="")
 d<-dist(traindtm)
 hc <- hclust(d,method="ward.D")
 dtmdim<-dim(traindtm)
-size<-15/dtmdim[1]
+size<-25/dtmdim[1]
 plot(hc, cex = size,main="",xlab="",ylab="",sub="")
 
 ```
