@@ -12,8 +12,8 @@ urltodata<-"/home/webadmin/R/dtm-test/data/"
 ```{r}
 #data=read.csv(input, header=T,sep=";")
 library(wordcloud2)
-wcsumv<-read.table(paste0(urltodata,"wc2sum"), header=T,sep="")
-wordcloud2(demoFreq, size = 0.8,shape="circle")
+wc2sumv<-read.table(paste0(urltodata,"wc2sum"), header=T,sep="")
+wordcloud2(wc2sumv, size = 0.8,shape="circle")
 
 ```
 
