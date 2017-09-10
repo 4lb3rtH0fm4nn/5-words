@@ -29,7 +29,8 @@ res <- data.frame(term=rownames(as.matrix(sumv)),frequency=rowSums(as.matrix(sum
 row.names(res)<-NULL
 write.table(sumv,paste0(urlout,"cwsum"))
 write.table(res,paste0(urlout,"wc2sum"))
-write.table(tdm_m,paste0(urlout,"dtm"))
+write.table(tdm_m,paste0(urlout,"tdm"))
+write.table(dtm_m,paste0(urlout,"dtm"))
 d <- dist(dtm_m)
 groups <- hclust(d,method="ward.D")
 
@@ -87,5 +88,16 @@ gsum<-rbind.fill.matrix(tmsumv,tfsumv,ttsumv)
 gsum<-t(gsum)
 gsum[is.na(gsum)] <- 0
 write.table(gsum,paste0(urlout,"gsum"))
+#number of genders
+numberofm<-dim(mdata)
+numberofm<-numberofm[1]
+numberoff<-dim(fdata)
+numberoff<-numberoff[1]
+numberoft<-dim(tdata)
+numberoft<-numberoft[1]
+genderv<-c(numberofm,numberoff,numberoft)
+write.table(genderv,paste0(urlout,"genderv"))
+#age
+ages<-eventdata[,2]
 
 rmarkdown::render("index.rmd")

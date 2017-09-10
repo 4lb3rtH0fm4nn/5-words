@@ -4,44 +4,74 @@ output:
   flexdashboard::flex_dashboard:
     storyboard: true
 ---
+
 ```{r}
 urltodata<-"/home/webadmin/R/dtm-test/data/"
+#arules
+library(arules)
+library(arulesViz)
+library(gridExtra)
+library(grid)
+library(plotly)
+dtm2<-read.table(paste0(urltodata,"dtm"), header=T,sep="")
+dtm2<-as.matrix(dtm2)
+wordtransactions<-as(dtm2,"transactions")
+capture.output( rules <- apriori(wordtransactions, parameter = list(supp = 0.002, conf = 0.08)), file='NUL')
+#rules <- apriori(wordtransactions, parameter = list(supp = 0.002, conf = 0.08))
+#invisible(rules <- invisible(apriori(wordtransactions, parameter = list(supp = 0.002, conf = 0.08))));
+options(digits=3)
+rules.sorted<-sort(rules, by="confidence", decreasing=TRUE)
+rulestoviz<-as(rules,"data.frame")
 ```
 ### These are the most common words that popped into your heads {data-width=100}
 
 ```{r}
-#data=read.csv(input, header=T,sep=";")
+
 library(wordcloud2)
-wc2sumv<-read.table(paste0(urltodata,"wc2sum"), header=T,sep="")
-wordcloud2(wc2sumv, size = 0.8,shape="circle")
+wcsumv<-read.table(paste0(urltodata,"wc2sum"), header=T,sep="")
+wordcloud2(wcsumv, size = 0.8,shape="circle")
 
 ```
 
 
-### Here you can see a wordcloud that represents the most frequent words based on gender. Legend: Blue - Male; Red - female; Purple - Other
+
+### These are some numerical data about your answers
 
 ```{r}
-library(wordcloud)
-gsum2<-read.table(paste0(urltodata,"gsum"), header=T,sep="")
-gsum2<-as.matrix(gsum2)
-colnames(gsum2)<-NULL
-comparison.cloud(gsum2,scale=c(3,.01),max.words=300,colors=c("deepskyblue3","firebrick2","darkorchid3"))
+itemFrequencyPlot(wordtransactions,topN=20,type="absolute")
+mvec<-read.table(paste0(urltodata,"genderv"), header=T,sep="")
+mvec<-c(mvec[1,],mvec[2,],mvec[3,])
+names(mvec)=c("males","felmales","Xgender")
+barplot(mvec)
 
 ```
 
-
-### You can see a cluster dendrogram here
+### Here are some rules concerning your answers.
 
 ```{r}
-library(cluster)
-library(ape)
+
+grid.table(rulestoviz[1:10,])
+plot(rules,method="graph",shading=NA,main="")
+```
+
+***
+
+Legend: Support  - The fraction of which our item set occurs in our dataset;
+  Confidence - probability that a rule is correct for a new transaction with items on the left;
+  Lift - The ratio by which by the confidence of a rule exceeds the expected confidence 
 
 
-traindtm<-read.table(paste0(urltodata,"dtm"), header=T,sep="")
-d<-dist(traindtm)
-hc <- hclust(d,method="ward.D")
-dtmdim<-dim(traindtm)
-size<-25/dtmdim[1]
-plot(hc, cex = size,main="",xlab="",ylab="",sub="")
+### Graphic representation of rules
+```{r}
+plotly_arules(rules,method="matrix", measure = c("support", "confidence"),shading = "confidence", max = 1000)
+```
 
+### Graphic representation of rules
+```{r}
+plotly_arules(rules,method="two-key plot", measure = c("support", "confidence"),shading = "confidence", max = 1000)
+```
+
+### Graphic representation of rules
+```{r}
+plotly_arules(rules,method="scatterplot", measure = c("support", "confidence"),shading = "confidence", max = 1000)
 ```
