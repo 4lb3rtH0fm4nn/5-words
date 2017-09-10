@@ -4,7 +4,6 @@ output:
   flexdashboard::flex_dashboard:
     storyboard: true
 ---
-
 ```{r}
 urltodata<-"/home/webadmin/R/dtm-test/data/"
 #arules
@@ -16,11 +15,17 @@ library(plotly)
 dtm2<-read.table(paste0(urltodata,"dtm"), header=T,sep="")
 dtm2<-as.matrix(dtm2)
 wordtransactions<-as(dtm2,"transactions")
-capture.output( rules <- apriori(wordtransactions, parameter = list(supp = 0.002, conf = 0.08)), file='NUL')
+capture.output( rules <- apriori(wordtransactions, parameter = list(supp = 0.002, conf = 0.2)), file='NUL')
 #rules <- apriori(wordtransactions, parameter = list(supp = 0.002, conf = 0.08))
 #invisible(rules <- invisible(apriori(wordtransactions, parameter = list(supp = 0.002, conf = 0.08))));
 options(digits=3)
 rules.sorted<-sort(rules, by="confidence", decreasing=TRUE)
+subset.matrix <- is.subset(rules.sorted, rules.sorted)
+subset.matrix[lower.tri(subset.matrix, diag=T)] <- 0
+redundant <- colSums(subset.matrix, na.rm=T) >= 1
+rules.pruned <- rules[!redundant]
+rules<-rules.pruned
+rules<-sort(rules, by="confidence", decreasing=TRUE)
 rulestoviz<-as(rules,"data.frame")
 ```
 ### These are the most common words that popped into your heads {data-width=100}
